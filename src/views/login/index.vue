@@ -38,6 +38,8 @@ export default {
         setToken(res.data.data.token)
         // 成功通知
         Notify({ type: 'success', message: '登录成功' })
+        // 跳转到首页
+        this.$router.push({ path: '/layout/home' })
       } catch (err) {
         this.isLoading = false
         Notify({ type: 'danger', message: '登录失败' })

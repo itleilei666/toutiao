@@ -20,6 +20,7 @@ const routes = [
   {
     path: '/layout',
     component: LayOut,
+    redirect: '/layout/home',
     children: [
       {
         path: 'user',

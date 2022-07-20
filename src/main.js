@@ -3,12 +3,24 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'amfe-flexible'
-import { NavBar, Form, Field, Button } from 'vant'
-
+import { NavBar, Form, Field, Button, Tabbar, TabbarItem, Icon, Tab, Tabs, Cell, List, PullRefresh, ActionSheet, Popup, Row, Col, Badge } from 'vant'
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Badge)
+Vue.use(Popup)
+Vue.use(PullRefresh)
+Vue.use(ActionSheet)
+Vue.use(Cell)
+Vue.use(List)
+Vue.use(Tab)
+Vue.use(Tabs)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
 Vue.use(NavBar)
 Vue.use(Form)
 Vue.use(Field)
 Vue.use(Button)
+Vue.use(Icon)
 
 Vue.config.productionTip = false
 

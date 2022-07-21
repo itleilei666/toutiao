@@ -2,12 +2,6 @@
 import axios from '@/utils/request'
 import { getToken } from '@/utils/token'
 
-export const getPinDaoList = async () => {
-  return await axios({
-    url: '/v1_0/channels'
-  })
-}
-
 // 登录请求
 export const loginTo = ({ mobile, code }) => {
   return axios({
@@ -17,6 +11,12 @@ export const loginTo = ({ mobile, code }) => {
       mobile,
       code
     }
+  })
+}
+
+export const getPinDaoList = async () => {
+  return await axios({
+    url: '/v1_0/channels'
   })
 }
 
@@ -79,6 +79,70 @@ export const reportArt = async ({ id, type }) => {
       target: id,
       type,
       remark: '其他问题'
+    }
+  })
+}
+
+// 文章-获取文章详情
+export const getArtDetailAPI = async (article_id) => {
+  return await axios({
+    url: `/v1_0/articles/${article_id}`
+  })
+}
+
+// 文章-关注用户
+export const userfollowingsAPI = async (userId) => {
+  return await axios({
+    url: '/v1_0/user/followings',
+    method: 'POST',
+    data: { target: userId }
+  })
+}
+
+// 文章-取消用户关注
+export const unUserfollowingsAPI = async (userId) => {
+  return await axios({
+    url: `/v1_0/user/followings/${userId}`,
+    method: 'DELETE'
+  })
+}
+// 文章-点赞
+export const artLiking = async (target) => {
+  return await axios({
+    url: '/v1_0/article/likings',
+    method: 'POST',
+    data: {
+      target
+    }
+  })
+}
+// 文章-取消点赞
+export const unArtLiking = async (target) => {
+  return await axios({
+    url: `/v1_0/article/likings/${target}`,
+    method: 'DELETE'
+  })
+}
+// 搜索-获取联想建议
+export const getSuggestion = async ({ keywords }) => {
+  return await axios({
+    url: '/v1_0/suggestion',
+    params: {
+      q: keywords
+    }
+  })
+}
+
+// 搜索-获取搜索结果
+export const getSearchResultAPI = async ({
+  page = 1, per_page = 10, q
+}) => {
+  return axios({
+    url: '/v1_0/search',
+    params: {
+      page,
+      per_page,
+      q
     }
   })
 }

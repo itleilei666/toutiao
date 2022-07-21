@@ -4,7 +4,7 @@ import { Notify } from 'vant'
 import { getToken } from './token'
 
 const axiosObj = axios.create({
-  baseURL: 'http://toutiao.itheima.net/'
+  baseURL: 'http://geek.itheima.net'
 })
 // 添加请求拦截器
 axiosObj.interceptors.request.use(function (config) {

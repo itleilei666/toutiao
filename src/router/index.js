@@ -4,6 +4,9 @@ import Login from '@/views/login'
 import User from '@/views/user'
 import Home from '@/views/home'
 import LayOut from '@/views/layout'
+import Search from '@/views/search'
+import searchResult from '@/views/search/searchResult.vue'
+import artDetial from '@/views/artDetial'
 
 Vue.use(VueRouter)
 
@@ -31,6 +34,21 @@ const routes = [
         component: Home
       }
     ]
+  },
+  {
+    path: '/search',
+    component: Search
+  },
+  {
+    path: '/search-res/:key',
+    component: searchResult
+  },
+  {
+    path: '/search-res/:key',
+    component: searchResult
+  }, {
+    path: '/art-detial',
+    component: artDetial
   }
 ]
 

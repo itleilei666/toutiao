@@ -3,14 +3,14 @@
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <!-- 文章列表 -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <article-item @disLikeArtFn="disLikeArtFn" v-for="obj in articleList" :key="obj.art_id" :artObj="obj" @reportArt="reportArt" ></article-item>
+        <article-item @click.native="goDetial(obj.art_id)" @disLikeArtFn="disLikeArtFn" v-for="obj in articleList" :key="obj.art_id" :artObj="obj" @reportArt="reportArt" ></article-item>
       </van-list>
     </van-pull-refresh>
   </div>
 </template>
 
 <script>
-import ArticleItem from './ArticleItem.vue'
+import ArticleItem from '../../../components/ArticleItem.vue'
 import { getArticlesAPI, disLikeArt, reportArt } from '@/api'
 import { Toast, Notify } from 'vant'
 export default {
@@ -66,6 +66,9 @@ export default {
       } catch (error) {
         Notify({ type: 'danger', message: '举报失败' })
       }
+    },
+    goDetial (id) {
+      this.$router.push(`/art-detial?article_id=${id}`)
     }
   }
 }

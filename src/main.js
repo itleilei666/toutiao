@@ -28,8 +28,15 @@ const autoFocus = {
   install (Vue) {
     Vue.directive('autoFocus', {
       inserted (el) {
-        const input = el.querySelector('input')
-        input.focus()
+        const tagName = el.tagName
+        if (tagName === 'TEXTAREA' || tagName === 'INPUT') {
+          el.focus()
+        } else {
+          const input = el.querySelector('input')
+          const textarea = el.querySelector('textarea')
+          el = input || textarea
+          el.focus()
+        }
       }
     })
   }

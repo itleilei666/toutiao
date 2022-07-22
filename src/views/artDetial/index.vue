@@ -36,13 +36,17 @@
                 <van-button  @click="loveFn (false) " v-else icon="good-job-o" type="danger" plain size="small">点赞</van-button>
             </div>
         </div>
+        <!-- 文章评论区域 -->
+        <div>
+          <CommentListVue></CommentListVue>
+        </div>
     </div>
 </template>
 
 <script>
 import { getArtDetailAPI, userfollowingsAPI, unUserfollowingsAPI, artLiking, unArtLiking } from '@/api'
-//, userfollowingsAPI, unUserfollowingsAPI
 import { timeAgo } from '@/utils/date'
+import CommentListVue from './commentList.vue'
 export default {
   data () {
     return {
@@ -77,6 +81,9 @@ export default {
         await artLiking(this.artObj.art_id)
       }
     }
+  },
+  components: {
+    CommentListVue: CommentListVue
   }
 }
 </script>

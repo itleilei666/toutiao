@@ -123,6 +123,48 @@ export const unArtLiking = async (target) => {
     method: 'DELETE'
   })
 }
+
+// 文章-获取文章评论
+export const getArtCommentsAPI = async ({ offset = null, limit = 10, artId }) => {
+  return await axios({
+    url: '/v1_0/comments',
+    params: {
+      type: 'a',
+      offset,
+      limit,
+      source: artId
+    }
+  })
+}
+// 文章-评论点赞
+export const comLiking = async (target) => {
+  return await axios({
+    url: '/v1_0/comment/likings',
+    method: 'POST',
+    data: {
+      target
+    }
+  })
+}
+// 文章-评论取消点赞
+export const unComLiking = async (target) => {
+  return await axios({
+    url: `/v1_0/comment/likings/${target}`,
+    method: 'DELETE'
+  })
+}
+// 文章-发布评论
+export const putCommentAPI = async ({ target, art_id = null, content }) => {
+  return await axios({
+    url: '/v1_0/comments',
+    method: 'POST',
+    data: {
+      target,
+      content,
+      art_id
+    }
+  })
+}
 // 搜索-获取联想建议
 export const getSuggestion = async ({ keywords }) => {
   return await axios({

@@ -12,7 +12,7 @@
 <script>
 import ArticleItem from '../../../components/ArticleItem.vue'
 import { getArticlesAPI, disLikeArt, reportArt } from '@/api'
-import { Toast, Notify } from 'vant'
+import Notify from '@/ui/notify.js'
 export default {
   props: {
     aid: Number
@@ -38,7 +38,7 @@ export default {
       if (isRef) {
         this.articleList = []
         this.isLoading = false
-        Toast('刷新成功')
+        Notify({ type: 'success', message: '刷新成功' })
       }
       this.articleList = [...this.articleList, ...res2.data.data.results]
       this.loading = false
@@ -55,7 +55,6 @@ export default {
         await disLikeArt(art_id)
         Notify({ type: 'success', message: '反馈成功' })
       } catch (error) {
-        console.log('执行了')
         Notify({ type: 'danger', message: '反馈失败' })
       }
     },

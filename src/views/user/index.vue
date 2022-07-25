@@ -6,10 +6,10 @@
       <van-cell>
         <!-- 使用 title 插槽来自定义标题 -->
         <template #icon>
-          <img :src="userInfo.photo" alt="" class="avatar">
+          <img :src="$store.state.userPhoto" alt="" class="avatar">
         </template>
         <template #title>
-          <span class="username">{{userInfo.name}}</span>
+          <span class="username">{{$store.state.userName}}</span>
         </template>
         <template #label>
           <van-tag color="#fff" text-color="#007bff">申请认证</van-tag>
@@ -62,6 +62,7 @@ export default {
       const res2 = await getUserPersonalInfoAPI()
       this.userBaseInfo = res2.data.data
       this.SET_USERPHOTO(this.userInfo.photo)
+      this.SET_USERNAME(this.userInfo.name)
     } catch (error) {
       console.log(error.message)
     }
@@ -81,7 +82,7 @@ export default {
           // on cancel
         })
     },
-    ...mapMutations(['SET_USERPHOTO'])
+    ...mapMutations(['SET_USERPHOTO', 'SET_USERNAME'])
   }
 }
 </script>

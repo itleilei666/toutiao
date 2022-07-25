@@ -1,6 +1,6 @@
 import axios from 'axios'
 // import router from '@/router'
-import { Notify } from 'vant'
+import Notify from '@/ui/notify.js'
 import { getToken, removeToken, setToken } from './token'
 import { getNewToken } from '../api'
 import router from '@/router'
@@ -42,7 +42,7 @@ axiosObj.interceptors.response.use(function (response) {
     // console.log(res)
   } else if (error.response.status === 500 && error.config.url === '/v1_0/authorizations' && error.config.method === 'put') {
     Notify({ type: 'warning', message: '身份认证已经过期，请重新登录' })
-    router.push('/login')
+    router.push(`/login?path=${router.currentRoute.fullPath}`)
   }
   return Promise.reject(error)
 })

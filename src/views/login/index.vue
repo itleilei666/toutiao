@@ -16,8 +16,9 @@
 <!-- 组件程序 -->
 <script>
 import { loginTo } from '@/api'
-import { Notify } from 'vant'
+import Notify from '@/ui/notify.js'
 import { setToken } from '@/utils/token'
+import { setStorage } from '@/utils/storage'
 export default {
   data () {
     return {
@@ -35,11 +36,11 @@ export default {
         const res = await loginTo(this.user)
         this.isLoading = false
         setToken(res.data.data.token)
-        localStorage.refresh_token = res.data.data.refresh_token
+        setStorage('refresh_token', res.data.data.refresh_token)
         // 成功通知
         Notify({ type: 'success', message: '登录成功' })
         // 跳转到首页
-        this.$router.push({ path: '/layout/home' })
+        this.$router.push({ path: this.$route.query.path || '/layout/home' })
       } catch (err) {
         this.isLoading = false
         Notify({ type: 'danger', message: '登录失败' })

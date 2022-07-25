@@ -1,0 +1,31 @@
+import Vue from 'vue'
+import { NavBar, Form, Field, Button, Tabbar, TabbarItem, Icon, Tab, Tabs, Cell, List, PullRefresh, ActionSheet, Popup, Row, Col, Badge, Search, Image as VanImage, Divider, Tag, CellGroup, Dialog, DatetimePicker, Loading, Lazyload } from 'vant'
+Vue.use(Lazyload, {
+  lazyComponent: true,
+  error: 'https://img2.baidu.com/it/u=811909476,2522539038&fm=253&fmt=auto&app=138&f=JPEG?w=780&h=500'
+})
+Vue.use(Loading)
+Vue.use(DatetimePicker)
+Vue.use(Tag)
+Vue.use(Dialog)
+Vue.use(CellGroup)
+Vue.use(Divider)
+Vue.use(VanImage)
+Vue.use(Row)
+Vue.use(Search)
+Vue.use(Col)
+Vue.use(Badge)
+Vue.use(Popup)
+Vue.use(PullRefresh)
+Vue.use(ActionSheet)
+Vue.use(Cell)
+Vue.use(List)
+Vue.use(Tab)
+Vue.use(Tabs)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
+Vue.use(NavBar)
+Vue.use(Form)
+Vue.use(Field)
+Vue.use(Button)
+Vue.use(Icon)

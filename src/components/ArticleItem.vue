@@ -8,15 +8,15 @@
           <!-- 标题 -->
           <span>{{ artObj.title }}</span>
           <!-- 单图 -->
-          <van-image v-if="artObj.cover.type === 1" class="thumb" :src="artObj.cover.images[0]">
-            <template v-slot:error>图片走丢了</template>
-          </van-image>
+          <lazy-component>
+            <img v-if="artObj.cover.type === 1" class="thumb" v-lazy="artObj.cover.images[0]">
+          </lazy-component>
         </div>
         <!-- 三张图片 -->
         <div v-if="artObj.cover.type === 3" class="thumb-box">
-          <van-image class="thumb" v-for="(url, index) in artObj.cover.images" :src="url" :key="index">
-            <template v-slot:error>图片走丢了</template>
-          </van-image>
+          <lazy-component>
+            <img class="thumb" v-for="(url, index) in artObj.cover.images" v-lazy="url" :key="index" >
+          </lazy-component>
         </div>
       </template>
       <!-- label 区域的插槽 -->
@@ -65,7 +65,6 @@ export default {
       } else { // 点击取消
         this.show = false
       }
-      console.log('cancel')
     },
     onSelect (action, item) {
       // 默认情况下点击选项时不会自动收起

@@ -26,8 +26,9 @@
 
 <script>
 import { getUserInfoAPI, setUserHead, setUserEdit } from '@/api'
-import { Notify } from 'vant'
+import Notify from '@/ui/notify.js'
 import { formatDate } from '@/utils/date'
+import { mapMutations } from 'vuex'
 export default {
   name: 'UserEdit',
   data () {
@@ -46,6 +47,7 @@ export default {
     this.userObj = res.data.data
   },
   methods: {
+    ...mapMutations(['SET_USERPHOTO', 'SET_USERNAME']),
     async onFileChange (e) {
       if (e.target.files.length === 0) return
       const file = e.target.files[0]
@@ -54,6 +56,7 @@ export default {
       try {
         const res = await setUserHead(fd)
         this.userObj.photo = res.data.data.photo
+        this.SET_USERPHOTO(res.data.data.photo)
       } catch (error) {
         console.log(error.message)
       }
@@ -74,6 +77,7 @@ export default {
           try {
             await setUserEdit({ name: this.uName })
             this.userObj.name = this.uName
+            this.SET_USERNAME(this.uName)
           } catch (error) {
             console.log(error.message)
           }

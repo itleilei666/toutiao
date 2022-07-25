@@ -40,7 +40,10 @@ const routes = [
       },
       {
         path: 'home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home')
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home'),
+        meta: {
+          scrollTo: 0
+        }
       }
     ]
   },

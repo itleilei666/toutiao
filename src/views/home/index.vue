@@ -16,7 +16,7 @@
     </van-popup>
     <!-- 内容列表 -->
     <div class="main">
-      <van-tabs v-model="active" :sticky="true" offset-top="1.2rem">
+      <van-tabs v-model="active" :sticky="true" offset-top="1.2rem" @change="change">
         <van-tab v-for="obj in channels" :title="obj.name" :key="obj.id" :name="obj.id">
           <article-list-vue :aid="obj.id"></article-list-vue>
         </van-tab>
@@ -36,7 +36,8 @@ export default {
       channels: [],
       allChannels: [],
       articleList: [],
-      show: false
+      show: false,
+      scrolls: {}
     }
   },
   async created () {
@@ -49,6 +50,10 @@ export default {
     ArticleListVue, channelEditVue
   },
   methods: {
+    async change () {
+      await this.$nextTick()
+      window.scrollTo(0, this.scrolls[this.active])
+    },
     showPopup () {
       this.show = true
     },
@@ -64,6 +69,11 @@ export default {
     closeFn () {
       this.show = false
       this.$refs.channelEditVue.isEdit = false
+    },
+    scrollFn () {
+      // console.log('滚动了')
+      this.$route.meta.scrollTo = document.documentElement.scrollTop
+      this.scrolls[this.active] = document.documentElement.scrollTop
     }
   },
   computed: {
@@ -79,6 +89,15 @@ export default {
         }
       })
     }
+  },
+  activated () {
+    // console.log('缓存激活')
+    window.scrollTo(0, this.$route.meta.scrollTo)
+    window.addEventListener('scroll', this.scrollFn)
+  },
+  deactivated () {
+    // console.log('缓存切换')
+    window.removeEventListener('scroll', this.scrollFn)
   }
 }
 </script>

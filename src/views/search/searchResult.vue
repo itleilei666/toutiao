@@ -37,13 +37,11 @@ export default {
       q: this.q
     })
     this.articleList = res.data.data.results
-    console.log(res.data.data.results)
   },
   methods: {
     async onLoad () {
       if (this.articleList.length > 0) {
         this.page++
-        console.log(this.page)
         const res = await getSearchResultAPI({
           q: this.q,
           page: this.page

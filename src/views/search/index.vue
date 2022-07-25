@@ -36,6 +36,7 @@
 
 <script>
 import { getSuggestion } from '@/api'
+import { getStorage, setStorage } from '@/utils/storage'
 export default {
   name: 'search-index',
   data () {
@@ -43,7 +44,7 @@ export default {
       kw: '', // 搜索关键字
       timer: null,
       suggestionList: [],
-      history: JSON.parse(localStorage.getItem('his')) || [] // 搜索历史
+      history: JSON.parse(getStorage('his')) || [] // 搜索历史
     }
   },
   methods: {
@@ -81,7 +82,7 @@ export default {
     history: {
       deep: true,
       handler (newV) {
-        localStorage.setItem('his', JSON.stringify(newV))
+        setStorage('his', JSON.stringify(newV))
       }
     }
   }

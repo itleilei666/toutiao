@@ -1,6 +1,6 @@
 // 请求接口封装模块
 import axios from '@/utils/request'
-
+import { getStorage } from '@/utils/storage'
 // 用户-登录请求
 export const loginTo = ({ mobile, code }) => {
   return axios({
@@ -46,7 +46,7 @@ export const getNewToken = async () => {
     url: '/v1_0/authorizations',
     method: 'PUT',
     headers: {
-      Authorization: `Bearer ${localStorage.refresh_token}`
+      Authorization: `Bearer ${getStorage('refresh_token')}`
     }
   })
 }

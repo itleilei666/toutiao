@@ -1,7 +1,9 @@
 import axios from 'axios'
-import router from '@/router'
+// import router from '@/router'
 import { Notify } from 'vant'
-import { getToken } from './token'
+import { getToken, removeToken, setToken } from './token'
+import { getNewToken } from '../api'
+import router from '@/router'
 
 const axiosObj = axios.create({
   baseURL: 'http://geek.itheima.net'
@@ -22,14 +24,27 @@ axiosObj.interceptors.request.use(function (config) {
 axiosObj.interceptors.response.use(function (response) {
   // 对响应数据做点什么  201,301
   return response
-}, function (error) {
+}, async function (error) {
   // 对响应错误做点什么 401,501
   // console.log(error.response.status)
   // console.log(11111)
   if (error.response.status === 401) {
+    // Notify({ type: 'warning', message: '身份认证已经过期，请重新登录' })
+    removeToken()
+    // 刷新token
+    const res = await getNewToken()
+    // 更新本地token
+    setToken(res.data.data.token)
+    error.config.headers.Authorization = `Bearer ${getToken()}`
+    // 执行上一次操作
+    return axios(error.config)
+    // router.replace('/login')
+    // console.log(res)
+  } else if (error.response.status === 500 && error.config.url === '/v1_0/authorizations' && error.config.method === 'put') {
     Notify({ type: 'warning', message: '身份认证已经过期，请重新登录' })
-    router.replace('/login')
+    router.push('/login')
   }
+  return Promise.reject(error)
 })
 
 export default ({ url, method = 'get', params, headers, data }) => {

@@ -37,6 +37,7 @@
 <script>
 import { getSuggestion } from '@/api'
 export default {
+  name: 'search-index',
   data () {
     return {
       kw: '', // 搜索关键字

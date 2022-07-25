@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       user: {
-        mobile: '13888457767',
+        mobile: '19911011011',
         code: '246810'
       },
       isLoading: false
@@ -33,9 +33,9 @@ export default {
       this.isLoading = true
       try {
         const res = await loginTo(this.user)
-        console.log(res)
         this.isLoading = false
         setToken(res.data.data.token)
+        localStorage.refresh_token = res.data.data.refresh_token
         // 成功通知
         Notify({ type: 'success', message: '登录成功' })
         // 跳转到首页

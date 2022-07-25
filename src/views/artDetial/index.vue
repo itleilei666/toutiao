@@ -48,6 +48,7 @@ import { getArtDetailAPI, userfollowingsAPI, unUserfollowingsAPI, artLiking, unA
 import { timeAgo } from '@/utils/date'
 import CommentListVue from './commentList.vue'
 export default {
+  name: 'art-index',
   data () {
     return {
       artObj: {}

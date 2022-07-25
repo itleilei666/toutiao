@@ -3,7 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'amfe-flexible'
-import { NavBar, Form, Field, Button, Tabbar, TabbarItem, Icon, Tab, Tabs, Cell, List, PullRefresh, ActionSheet, Popup, Row, Col, Badge, Search, Image as VanImage, Divider } from 'vant'
+import { NavBar, Form, Field, Button, Tabbar, TabbarItem, Icon, Tab, Tabs, Cell, List, PullRefresh, ActionSheet, Popup, Row, Col, Badge, Search, Image as VanImage, Divider, Tag, CellGroup, Dialog, DatetimePicker } from 'vant'
+Vue.use(DatetimePicker)
+Vue.use(Tag)
+Vue.use(Dialog)
+Vue.use(CellGroup)
 Vue.use(Divider)
 Vue.use(VanImage)
 Vue.use(Row)
@@ -28,6 +32,17 @@ const autoFocus = {
   install (Vue) {
     Vue.directive('autoFocus', {
       inserted (el) {
+        const tagName = el.tagName
+        if (tagName === 'TEXTAREA' || tagName === 'INPUT') {
+          el.focus()
+        } else {
+          const input = el.querySelector('input')
+          const textarea = el.querySelector('textarea')
+          el = input || textarea
+          el.focus()
+        }
+      },
+      update (el) {
         const tagName = el.tagName
         if (tagName === 'TEXTAREA' || tagName === 'INPUT') {
           el.focus()

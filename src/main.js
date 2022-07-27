@@ -1,3 +1,4 @@
+import '@/utils/console.js'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -7,7 +8,7 @@ import 'highlight.js/styles/default.css' // 代码高亮的样式
 import './vantbase.js'
 import autoFocus from './directiveg/index.js'
 Vue.use(autoFocus)
-
+console.log(1111)
 Vue.config.productionTip = false
 
 new Vue({
